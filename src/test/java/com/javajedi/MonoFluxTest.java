@@ -22,7 +22,6 @@ public class MonoFluxTest {
                 .concatWithValues("Cloud")
                 .log();
         flux.subscribe(value -> System.out.println(value + " " + Thread.currentThread().getName()), e -> System.out.println(e.getMessage()));
-        System.out.println(Thread.currentThread().getName());
     }
 
 }

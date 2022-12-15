@@ -5,6 +5,7 @@ import com.javajedi.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
@@ -21,6 +22,11 @@ public class CustomerController {
     @GetMapping
     public List<Customer> getAllCustomers() {
         return customerService.loadAllCustomers();
+    }
+
+    @GetMapping("/{input}")
+    public List<Customer> getCustomerById(@PathVariable("input") String input) {
+        return customerService.loadCustomerById(Integer.valueOf(input));
     }
 
     @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)

@@ -34,4 +34,11 @@ public class CustomerService {
         return customers;
     }
 
+    public List<Customer> loadCustomerById(Integer id) {
+        return customerRepository
+                .customerList().parallelStream()
+                .filter(customer -> customer.id().equals(id))
+                .collect(Collectors.toList());
+    }
+
 }

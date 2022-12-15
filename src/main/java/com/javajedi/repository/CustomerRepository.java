@@ -14,26 +14,35 @@ import java.util.stream.IntStream;
 @Component
 public class CustomerRepository {
 
+    private static final List<String> NAMES = List.of("james", "mike", "baggio", "dave", "david");
+
     public List<Customer> customerList() {
-        var names = List.of("james", "mike", "baggio", "dave", "david");
-        return IntStream.rangeClosed(1, 10)
+        return IntStream.rangeClosed(1, 100)
                 .peek(i -> log.info("""
-                        Customer with id: %s has been processed
-                        """.formatted(i))
+                        %s : Customer with id: %s has been processed
+                        """.formatted(Thread.currentThread().getName(), i))
                 )
                 .peek(this::sleep)
-                .mapToObj(i -> new Customer(i, names.get(i % names.size()) + " " + i))
+                .mapToObj(i -> new Customer(i, NAMES.get(i % NAMES.size()) + " " + i))
                 .collect(Collectors.toList());
     }
 
-    public Flux<Customer> customerStream() {
-        var names = List.of("james", "mike", "baggio", "dave", "david");
+    public Flux<Customer> loadCustomerStream() {
          return Flux.range(1, 10)
                  .doOnEach(i -> log.info("""
                         %s : Customer with id: %s has been processed
                         """.formatted(Thread.currentThread().getName(), i)))
                 .delayElements(Duration.ofSeconds(1))
-                .map(i -> new Customer(i, names.get(i % names.size()) + " " + i));
+                .map(i -> new Customer(i, NAMES.get(i % NAMES.size()) + " " + i));
+    }
+
+    public Flux<Customer> customerStream() {
+        return Flux.range(1, 100)
+                .doOnEach(i -> log.info("""
+                        %s : Customer with id: %s has been processed
+                        """.formatted(Thread.currentThread().getName(), i)))
+                .delayElements(Duration.ofMillis(100))
+                .map(i -> new Customer(i, NAMES.get(i % NAMES.size()) + " " + i));
     }
 
     private void sleep(long duration) {

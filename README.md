@@ -11,7 +11,7 @@ Non-blocking Asynchronous web service using Spring Web Flux.
 
 ### Functionality
 
-A traditional MVC pattern - [Controller - Service - Repository]()
+A traditional MVC pattern - [Controller - Service - Repository](https://github.com/baggio1103/customer-service-flux/blob/main/src/main/java/com/javajedi/controller/CustomerController.java)
 
 CustomerController Endpoints:
 
@@ -20,7 +20,7 @@ CustomerController Endpoints:
 * **_/customers/stream_** - returns a list of customers. It is an
   asynchronous non-blocking endpoint.
 
-A similar functionality pattern in Web Flux - [Router - Handler - Repository]()
+A similar functionality pattern in Web Flux - [Router - Handler - Repository](https://github.com/baggio1103/customer-service-flux/blob/main/src/main/java/com/javajedi/router/RouterConfig.java)
 
 Router provides similar functionality as RestController,
 it defines endpoints and method that is responsible for handling request.

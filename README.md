@@ -25,10 +25,11 @@ A similar functionality pattern in Web Flux - [Router - Handler - Repository]()
 Router provides similar functionality as RestController,
 it defines endpoints and method that is responsible for handling request.
 
-`@Bean
+```
+@Bean
 public RouterFunction<ServerResponse> routerFunction() {
 return RouterFunctions.route()
 .GET("/router/customers", customerHandler::loadCustomers)
 .build();
 }
-`
+```
